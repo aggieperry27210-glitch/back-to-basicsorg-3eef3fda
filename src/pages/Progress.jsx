@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Trophy, Star, TrendingUp, BookOpen, Award, Calendar, Target, Zap, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { achievementsConfig } from "@/data/achievements";
 
 export default function Progress() {
   const { data: user, isLoading: userLoading } = useQuery({
@@ -71,50 +72,10 @@ export default function Progress() {
     : 0;
 
   // Achievements
-  const achievements = [
-    {
-      title: "Getting Started",
-      description: "Complete your first quiz",
-      icon: "🎯",
-      earned: totalCompleted >= 1,
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      title: "Quiz Master",
-      description: "Complete 5 quizzes",
-      icon: "📚",
-      earned: totalCompleted >= 5,
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      title: "Perfect Score",
-      description: "Get 100% on any quiz",
-      icon: "💯",
-      earned: userProgress.some(p => p.score === 100),
-      color: "from-yellow-500 to-orange-500"
-    },
-    {
-      title: "Politics Expert",
-      description: "Complete all Politics quizzes",
-      icon: "🏛️",
-      earned: completedPolitics === politicsQuizzes.length && politicsQuizzes.length > 0,
-      color: "from-blue-500 to-indigo-500"
-    },
-    {
-      title: "Finance Guru",
-      description: "Complete all Finance quizzes",
-      icon: "💰",
-      earned: completedFinance === financeQuizzes.length && financeQuizzes.length > 0,
-      color: "from-green-500 to-emerald-500"
-    },
-    {
-      title: "Overachiever",
-      description: "Maintain 90%+ average score",
-      icon: "⭐",
-      earned: averageScore >= 90 && userProgress.length >= 3,
-      color: "from-pink-500 to-rose-500"
-    },
-  ];
+  const achievements = achievementsConfig.map(config => ({
+    ...config,
+    earned: config.checkEarned(userProgress, completedPolitics, politicsQuizzes, completedFinance, financeQuizzes, averageScore)
+  }));
 
   const earnedAchievements = achievements.filter(a => a.earned);
 
