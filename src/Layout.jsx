@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { createPageUrl } from "@/utils";
-import { Home, BookOpen, TrendingUp, FileSearch, Trophy, Mail, Phone, Info } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+import { navItems } from "@/config/navigation.config";
 
 export default function Layout({ children, currentPageName }) {
   const location = useLocation();
@@ -25,17 +25,6 @@ export default function Layout({ children, currentPageName }) {
       }
     };
   }, []);
-
-  const navItems = [
-    { name: "Home", path: createPageUrl("Home"), icon: Home },
-    { name: "Politics", path: createPageUrl("Politics"), icon: BookOpen },
-    { name: "Finance", path: createPageUrl("Finance"), icon: TrendingUp },
-    { name: "Math", path: createPageUrl("Math"), icon: BookOpen },
-    { name: "ELA", path: createPageUrl("ELA"), icon: BookOpen },
-    { name: "Progress", path: createPageUrl("Progress"), icon: Trophy },
-    { name: "Bias Checker", path: createPageUrl("NewsBiasChecker"), icon: FileSearch },
-    { name: "About", path: createPageUrl("AboutUs"), icon: Info },
-  ];
 
   const isActive = (path) => location.pathname === path;
 
