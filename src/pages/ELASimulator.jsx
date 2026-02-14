@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Trophy, BookOpen, Target, Clock, CheckCircle2, XCircle, Flame } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { vocabularyWords, grammarQuestions } from "@/data/ela";
 
 export default function ELASimulator() {
   const navigate = useNavigate();
